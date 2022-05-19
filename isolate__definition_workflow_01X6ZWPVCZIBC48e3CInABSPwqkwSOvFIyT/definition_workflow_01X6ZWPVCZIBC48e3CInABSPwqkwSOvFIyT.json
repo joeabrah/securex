@@ -1,0 +1,144 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01X6ZWPVCZIBC48e3CInABSPwqkwSOvFIyT",
+    "name": "Joe - Secure Endpoint Isolate Host",
+    "title": "Joe - Secure Endpoint Isolate Host",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "ip_address",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01X70PGDKYYR408WPaDqz6qtalvviYtAvCY",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_value",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01X70QJYE66993rkkE9nZ0F58M0vtIujJdf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_type",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01X70QRG9870220Zkxi2qHY77DT7x6DvAIS",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Joe - Secure Endpoint Isolate Host",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01X70K8TIIEZ07WRXCrWzPCeWa541dqhVc9",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01X70K8TW80903kIDVHOivYW6KAiOOHkCSS",
+            "name": "Condition Branch",
+            "title": "Set IP Address",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01X6ZWPVCZIBC48e3CInABSPwqkwSOvFIyT.input.variable_workflow_01X70QRG9870220Zkxi2qHY77DT7x6DvAIS$",
+                "operator": "eq",
+                "right_operand": "ip_address"
+              },
+              "continue_on_failure": false,
+              "display_name": "Set IP Address",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01X70KH4LIFKX5Yx1eVXDhH3Cp3tPOQ70jt",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01X6ZWPVCZIBC48e3CInABSPwqkwSOvFIyT.local.variable_workflow_01X70PGDKYYR408WPaDqz6qtalvviYtAvCY$",
+                      "variable_value_new": "$workflow.definition_workflow_01X6ZWPVCZIBC48e3CInABSPwqkwSOvFIyT.input.variable_workflow_01X70QJYE66993rkkE9nZ0F58M0vtIujJdf$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "category_01NKU56HVICL53AmT4UwepyR1b3TE6WkG9i"
+    ]
+  },
+  "categories": {
+    "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r": {
+      "unique_name": "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "name": "SecureX",
+      "title": "SecureX",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01NKU56HVICL53AmT4UwepyR1b3TE6WkG9i": {
+      "unique_name": "category_01NKU56HVICL53AmT4UwepyR1b3TE6WkG9i",
+      "name": "incident",
+      "title": "incident",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
