@@ -1,0 +1,204 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01XHZZG4PKFKY4JHtoIme42cP4c16SBCvvt",
+    "name": "Secure Endpoint APIv3",
+    "title": "Secure Endpoint APIv3",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 100,
+          "scope": "local",
+          "name": "Records Per Page",
+          "type": "datatype.integer",
+          "description": "How many event records to fetch per page",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01XHZZG50F4JN5T8jq3BNbD5BRe7TU6TdXh",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "Page Offset",
+          "type": "datatype.integer",
+          "description": "The index of the first record to fetch from Secure Endpoint. This is set automatically",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01XHZZG50FHGN3hNZbHUMHsHsRhTMp32Kso",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Target Group: Default TargetGroup\n\nTargets: AMP_Target, CTR_For_Access_Token, Private_CTIA_Target\n\nSteps:\n[] Calculate the time 24 hours ago\n[] While there are events to process:\n[]\u003e Get events from Secure Endpoint\n[]\u003e Convert the events to a table\n[]\u003e Loop through each event:\n[]\u003e\u003e Extract attributes from the event\n[]\u003e\u003e Convert the list of vulnerabilities to text\n[]\u003e\u003e If the CVE threshold was met, open an incident\n[]\u003e Check if there's another page of events\n[]\u003e\u003e If there is, update the paging variables and continue\n[]\u003e\u003e If there isn't, end the workflow\n\nMore information: http://ciscosecurity.github.io/sxo-05-security-workflows/workflows/0022",
+      "display_name": "Secure Endpoint APIv3",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01NKRYW05XLM40E1nVZqdvqb5BJdW1tMuDL",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01XHZZGBRTVVX7ALW0iqfPt5Ql8yiCKDLkw",
+        "name": "Calculate Date",
+        "title": "Calculate time 24 hours ago",
+        "type": "core.calculate_date",
+        "base_type": "activity",
+        "properties": {
+          "adjustment": -86400,
+          "continue_on_failure": false,
+          "display_name": "Calculate time 24 hours ago",
+          "original_date": "$workflow.definition_workflow_01XHZZG4PKFKY4JHtoIme42cP4c16SBCvvt.output.start_time$",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01XJPIL67WZU70bLEhZd4eHnAKueXmmSaW9",
+        "name": "Get_Secure_Endpoint_Access_Token_v3",
+        "title": "Get_Secure_Endpoint_Access_Token_v3",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "display_name": "Get_Secure_Endpoint_Access_Token_v3",
+          "runtime_user": {
+            "target_default": true
+          },
+          "target": {
+            "no_target": true
+          },
+          "workflow_id": "definition_workflow_01XI1FKHWPFQ40o7AXAx9HPRCQ2qxDrD8gK",
+          "workflow_name": "Get_Secure_Endpoint_Access_Token_v3"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01XI2VTFM84LT3fpOuSLdrL9csdKGwRqjGM",
+        "name": "HTTP Request",
+        "title": "Secure Endpoint - Get Organization",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": false,
+          "allow_headers_redirect": false,
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $global.variable_01XI3A92E8IHN4nIMo9xcOF4YuNW8sYNM4D.global.variable_01XI3A92E8IHN4nIMo9xcOF4YuNW8sYNM4D$"
+            }
+          ],
+          "display_name": "Secure Endpoint - Get Organization",
+          "method": "GET",
+          "relative_url": "organizations?size=10",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "triggers": {
+    "triggerschedule_01XHZZG9NFS7C2VMJNd8MkCCosFwx0Jo9uU": {
+      "workflow_id": "definition_workflow_01XHZZG4PKFKY4JHtoIme42cP4c16SBCvvt",
+      "name": "Secure Endpoint Event Polling",
+      "title": "",
+      "lowercase_name": "schedule.secure_endpoint_event_polling",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01NP1X3GIFMPC40ImPJpkQ8If9nsuaqK7G0",
+      "version": "1.0.0",
+      "disabled": true,
+      "unique_name": "triggerschedule_01XHZZG9NFS7C2VMJNd8MkCCosFwx0Jo9uU",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01NP1X3GIFMPC40ImPJpkQ8If9nsuaqK7G0": {
+      "unique_name": "schedule_01NP1X3GIFMPC40ImPJpkQ8If9nsuaqK7G0",
+      "name": "0022 - Secure Endpoint - Vulnerabilities to SecureX Incidents",
+      "description": "This schedule is used to check for new vulnerable application detection events in Secure Endpoint",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "02:00",
+        "interval_hours": 0,
+        "interval_minutes": 0,
+        "number_of_times": 1,
+        "display_name": "0022 - Secure Endpoint - Vulnerabilities to SecureX Incidents",
+        "description": "This schedule is used to check for new vulnerable application detection events in Secure Endpoint"
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_01NKRYW05XLM40E1nVZqdvqb5BJdW1tMuDL": {
+      "unique_name": "definition_target_01NKRYW05XLM40E1nVZqdvqb5BJdW1tMuDL",
+      "name": "Secure_Endpoint_v3",
+      "title": "Secure_Endpoint_v3",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Secure Endpoint v3 API",
+        "disable_certificate_validation": false,
+        "display_name": "Secure_Endpoint_v3",
+        "host": "api.amp.cisco.com",
+        "no_runtime_user": true,
+        "path": "/v3",
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_01XI3A92E8IHN4nIMo9xcOF4YuNW8sYNM4D": {
+      "unique_name": "variable_01XI3A92E8IHN4nIMo9xcOF4YuNW8sYNM4D",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Secure Endpoint Access Token",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01XI1FKHWPFQ40o7AXAx9HPRCQ2qxDrD8gK"
+  ],
+  "dependent_workflows": [
+    "definition_workflow_01XI1FKHWPFQ40o7AXAx9HPRCQ2qxDrD8gK"
+  ]
+}
