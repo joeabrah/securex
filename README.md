@@ -2,7 +2,7 @@
 
 ## Keys
 01 - Workflows for Secure Endpoint   
-11 - Atomic Actions for Secure Endpoint
+11 - Atomic Actions for Secure Endpoint   
 21 - Multi-product Workflows
 
 ## Workflow Library 
