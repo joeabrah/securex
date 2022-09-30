@@ -1,0 +1,221 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD",
+    "name": "Joe - ISE - Authenticate API",
+    "title": "Joe - ISE - Authenticate API",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "X-CSRF-TOKEN",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_020D2TWU9Y36J7UNRPUht78EkAbBX86jLdw",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "Cisco ISE",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Joe - ISE - Authenticate API",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_020D2TWVY7S755csn2jgJURWEeFcgKp82Bh",
+        "name": "HTTP Request",
+        "title": "Send Authentication Request for Token",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "accept": "application/json",
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "allow_headers_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "X-CSRF-TOKEN",
+              "value": "fetch"
+            }
+          ],
+          "display_name": "Send Authentication Request for Token",
+          "method": "GET",
+          "relative_url": "/ers/config/node/versioninfo",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_020D2X2CWCHTV5Nnq07PpqNw4e6sM3gnOWG",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_020D2TWVY7S755csn2jgJURWEeFcgKp82Bh.output.response_headers$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_020D2XOSFHTP72U3N2cQuj21W7GseQEKyio",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_020D2XOSSKNIL5KAT09k5ItIAT3NZ9vjgvo",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_020D2X2CWCHTV5Nnq07PpqNw4e6sM3gnOWG.input.source_array[@].name$",
+                    "operator": "eq",
+                    "right_operand": "X-Csrf-Token"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_020D2Y1ZEYHCH4atF6ARgF32t87oTw0PeWP",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD.output.variable_workflow_020D2TWU9Y36J7UNRPUht78EkAbBX86jLdw$",
+                          "variable_value_new": "$activity.definition_activity_020D2X2CWCHTV5Nnq07PpqNw4e6sM3gnOWG.input.source_array[@].value$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r"
+    ]
+  },
+  "categories": {
+    "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r": {
+      "unique_name": "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "name": "SecureX",
+      "title": "SecureX",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z": {
+      "unique_name": "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z",
+      "name": "SecureX_Remote_ISE",
+      "title": "SecureX_Remote_ISE",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "ao_remote_id": "01XJQBOIXRA721ZXpq8tRtxQt8qs5MjdqgD",
+        "default_runtime_user_id": "definition_runtime_user_020BBVB96DT917lcMIfZ87MqtbohdXt09H2",
+        "disable_certificate_validation": true,
+        "display_name": "SecureX_Remote_ISE",
+        "host": "192.168.40.8",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "port": 9060,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_020BBVB96DT917lcMIfZ87MqtbohdXt09H2": {
+      "unique_name": "definition_runtime_user_020BBVB96DT917lcMIfZ87MqtbohdXt09H2",
+      "name": "ISE_API_Basic_Key",
+      "title": "ISE_API_Basic_Key",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "Basic",
+        "basic_password": "*****",
+        "basic_username": "joe",
+        "display_name": "ISE_API_Basic_Key"
+      }
+    }
+  },
+  "remotemetas": {
+    "remote_meta_01XJQBOIXU8XB3sbKrhMzHKJULeRHwa0E58": {
+      "base_type": "remote_meta",
+      "type": "generic.remote_meta",
+      "name": "Phoenix Lab Remote",
+      "title": "Phoenix Lab Remote",
+      "version": "1.0.0",
+      "properties": {
+        "cloud_type": "vmware",
+        "display_name": "Phoenix Lab Remote",
+        "network": {
+          "dns_servers": "192.168.40.3,192.168.40.4",
+          "gateway": "192.168.40.1",
+          "ip_endpoint": "192.168.40.25/24",
+          "is_static_ip": true
+        },
+        "proxy": {
+          "require_proxy": false
+        }
+      },
+      "unique_name": "remote_meta_01XJQBOIXU8XB3sbKrhMzHKJULeRHwa0E58",
+      "object_type": "remote_meta"
+    }
+  }
+}
