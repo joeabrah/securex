@@ -1,8 +1,8 @@
 {
   "workflow": {
     "unique_name": "definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD",
-    "name": "Joe - ISE - Authenticate API",
-    "title": "Joe - ISE - Authenticate API",
+    "name": "Joe - ISE - Get CSRF Token",
+    "title": "Joe - ISE - Get CSRF Token",
     "type": "generic.workflow",
     "base_type": "workflow",
     "variables": [
@@ -26,7 +26,7 @@
         "is_atomic": true
       },
       "delete_workflow_instance": false,
-      "display_name": "Joe - ISE - Authenticate API",
+      "display_name": "Joe - ISE - Get CSRF Token",
       "runtime_user": {
         "target_default": true
       },
