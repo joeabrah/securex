@@ -1,0 +1,241 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_020D3EWTUKNTZ1zNt57yF84vkN7RLktJj6k",
+    "name": "Joe - ISE - Get Endpoint By Name",
+    "title": "Joe - ISE - Get Endpoint By Name",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Endpoint Mac Address",
+          "type": "datatype.string",
+          "description": "Format: aa:bb:cc:dd:ee:ff",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_020D3KKLW7KYI3L6acMl5Eyl9S1ZxsZuu41",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Joe - ISE - Get Endpoint By Name",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_020D3GO6QLJLE5M5OTyfqyY8pzdRlvE4WX6",
+        "name": "Joe - ISE - Get CSRF Token",
+        "title": "Joe - ISE - Get CSRF Token",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "display_name": "Joe - ISE - Get CSRF Token",
+          "runtime_user": {
+            "target_default": true
+          },
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD",
+          "workflow_name": "Joe - ISE - Get CSRF Token"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_020D3I248WCZE1eBOiJ32ZAiKuxL0mzDDoh",
+        "name": "HTTP Request",
+        "title": "Get Endpoint By Name (MAC Address)",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "accept": "application/json",
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "allow_headers_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "X-CSRF-TOKEN",
+              "value": "$activity.definition_activity_020D3GO6QLJLE5M5OTyfqyY8pzdRlvE4WX6.output.variable_workflow_020D2TWU9Y36J7UNRPUht78EkAbBX86jLdw$"
+            }
+          ],
+          "display_name": "Get Endpoint By Name (MAC Address)",
+          "method": "GET",
+          "relative_url": "/ers/config/endpoint/name/$workflow.definition_workflow_020D3EWTUKNTZ1zNt57yF84vkN7RLktJj6k.input.variable_workflow_020D3KKLW7KYI3L6acMl5Eyl9S1ZxsZuu41$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_020D3QBPH33BY1nGCaEz7OyMlSyMhFZXZxI",
+        "name": "Webex - Send Message to User",
+        "title": "Webex - Send Message to User",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Webex - Send Message to User",
+          "input": {
+            "variable_workflow_01PP77FMYQNAT1f0Boc3Jsu8zZuOJc7OaZs": "joeabrah@cisco.com",
+            "variable_workflow_01PP77FMYQOKB6sht7fo6ocrtxThxDnzqIj": "",
+            "variable_workflow_01PP77FMYQPR36iRvL3LB8HijkENSJBlq5v": "",
+            "variable_workflow_01PP77FMYQQX64KQBAlf3SoPQsmb3b6YMD4": "$activity.definition_activity_020D3I248WCZE1eBOiJ32ZAiKuxL0mzDDoh.output.response_body$",
+            "variable_workflow_01PP77FMYQS346717GaMvyINtP5frU9HCPI": "$global.variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty.global.variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01NKRYX74702I1sddl09Wi39LeLUXcZ0WO8",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1",
+          "workflow_name": "Webex - Send Message to User"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r"
+    ]
+  },
+  "categories": {
+    "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r": {
+      "unique_name": "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "name": "SecureX",
+      "title": "SecureX",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01NKRYX74702I1sddl09Wi39LeLUXcZ0WO8": {
+      "unique_name": "definition_target_01NKRYX74702I1sddl09Wi39LeLUXcZ0WO8",
+      "name": "Webex Teams",
+      "title": "Webex Teams",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Webex Teams",
+        "disable_certificate_validation": false,
+        "display_name": "Webex Teams",
+        "host": "webexapis.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z": {
+      "unique_name": "definition_target_020BBUVDP4V7X7Wrkjua9i3BYYGHP2LiL7z",
+      "name": "SecureX_Remote_ISE",
+      "title": "SecureX_Remote_ISE",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "ao_remote_id": "01XJQBOIXRA721ZXpq8tRtxQt8qs5MjdqgD",
+        "default_runtime_user_id": "definition_runtime_user_020BBVB96DT917lcMIfZ87MqtbohdXt09H2",
+        "disable_certificate_validation": true,
+        "display_name": "SecureX_Remote_ISE",
+        "host": "192.168.40.8",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "port": 9060,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_020BBVB96DT917lcMIfZ87MqtbohdXt09H2": {
+      "unique_name": "definition_runtime_user_020BBVB96DT917lcMIfZ87MqtbohdXt09H2",
+      "name": "ISE_API_Basic_Key",
+      "title": "ISE_API_Basic_Key",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "Basic",
+        "basic_password": "*****",
+        "basic_username": "joe",
+        "display_name": "ISE_API_Basic_Key"
+      }
+    }
+  },
+  "variables": {
+    "variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty": {
+      "unique_name": "variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "SecureX Webex Bot",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD",
+    "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1"
+  ],
+  "remotemetas": {
+    "remote_meta_01XJQBOIXU8XB3sbKrhMzHKJULeRHwa0E58": {
+      "base_type": "remote_meta",
+      "type": "generic.remote_meta",
+      "name": "Phoenix Lab Remote",
+      "title": "Phoenix Lab Remote",
+      "version": "1.0.0",
+      "properties": {
+        "cloud_type": "vmware",
+        "display_name": "Phoenix Lab Remote",
+        "network": {
+          "dns_servers": "192.168.40.3,192.168.40.4",
+          "gateway": "192.168.40.1",
+          "ip_endpoint": "192.168.40.25/24",
+          "is_static_ip": true
+        },
+        "proxy": {
+          "require_proxy": false
+        }
+      },
+      "unique_name": "remote_meta_01XJQBOIXU8XB3sbKrhMzHKJULeRHwa0E58",
+      "object_type": "remote_meta"
+    }
+  },
+  "dependent_workflows": [
+    "definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD",
+    "definition_workflow_01PP77FN50P7N3oE83oYly8DyWnsqloXtJ1"
+  ]
+}
