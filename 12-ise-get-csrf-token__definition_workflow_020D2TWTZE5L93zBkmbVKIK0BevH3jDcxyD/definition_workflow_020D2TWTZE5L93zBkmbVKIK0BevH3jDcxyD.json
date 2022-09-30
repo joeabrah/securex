@@ -41,7 +41,7 @@
       {
         "unique_name": "definition_activity_020D2TWVY7S755csn2jgJURWEeFcgKp82Bh",
         "name": "HTTP Request",
-        "title": "Send Authentication Request for Token",
+        "title": "Fetch CSRF Token",
         "type": "web-service.http_request",
         "base_type": "activity",
         "properties": {
@@ -58,7 +58,7 @@
               "value": "fetch"
             }
           ],
-          "display_name": "Send Authentication Request for Token",
+          "display_name": "Fetch CSRF Token",
           "method": "GET",
           "relative_url": "/ers/config/node/versioninfo",
           "runtime_user": {
@@ -74,12 +74,12 @@
       {
         "unique_name": "definition_activity_020D2X2CWCHTV5Nnq07PpqNw4e6sM3gnOWG",
         "name": "For Each",
-        "title": "For Each",
+        "title": "Loop Through Response Headers",
         "type": "logic.for_each",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "display_name": "For Each",
+          "display_name": "Loop Through Response Headers",
           "skip_execution": false,
           "source_array": "$activity.definition_activity_020D2TWVY7S755csn2jgJURWEeFcgKp82Bh.output.response_headers$"
         },
@@ -88,12 +88,12 @@
           {
             "unique_name": "definition_activity_020D2XOSFHTP72U3N2cQuj21W7GseQEKyio",
             "name": "Condition Block",
-            "title": "Condition Block",
+            "title": "Find the header name match for \"X-Csrf-Token\"",
             "type": "logic.if_else",
             "base_type": "activity",
             "properties": {
               "continue_on_failure": false,
-              "display_name": "Condition Block",
+              "display_name": "Find the header name match for \"X-Csrf-Token\"",
               "skip_execution": false
             },
             "object_type": "definition_activity",
@@ -101,7 +101,7 @@
               {
                 "unique_name": "definition_activity_020D2XOSSKNIL5KAT09k5ItIAT3NZ9vjgvo",
                 "name": "Condition Branch",
-                "title": "Condition Branch",
+                "title": "Header Name Equals X-Csrf-Token",
                 "type": "logic.condition_block",
                 "base_type": "activity",
                 "properties": {
@@ -111,7 +111,7 @@
                     "right_operand": "X-Csrf-Token"
                   },
                   "continue_on_failure": false,
-                  "display_name": "Condition Branch",
+                  "display_name": "Header Name Equals X-Csrf-Token",
                   "skip_execution": false
                 },
                 "object_type": "definition_activity",
@@ -119,12 +119,12 @@
                   {
                     "unique_name": "definition_activity_020D2Y1ZEYHCH4atF6ARgF32t87oTw0PeWP",
                     "name": "Set Variables",
-                    "title": "Set Variables",
+                    "title": "Set X-CSRF-Token Variable",
                     "type": "core.set_multiple_variables",
                     "base_type": "activity",
                     "properties": {
                       "continue_on_failure": false,
-                      "display_name": "Set Variables",
+                      "display_name": "Set X-CSRF-Token Variable",
                       "skip_execution": false,
                       "variables_to_update": [
                         {
