@@ -26,6 +26,7 @@
         "is_atomic": false
       },
       "delete_workflow_instance": false,
+      "description": "This workflow provides the capability to pull endpoint information by the endpoint's MAC address.",
       "display_name": "Joe - ISE - Get Endpoint By Name",
       "runtime_user": {
         "target_default": true
@@ -76,9 +77,10 @@
           "custom_headers": [
             {
               "name": "X-CSRF-TOKEN",
-              "value": "$activity.definition_activity_020D3GO6QLJLE5M5OTyfqyY8pzdRlvE4WX6.output.variable_workflow_020D2TWU9Y36J7UNRPUht78EkAbBX86jLdw$"
+              "value": "$activity.definition_activity_020D3GO6QLJLE5M5OTyfqyY8pzdRlvE4WX6.output.variable_workflow_020GBET3NNPMJ1mGm4pi4YlP6yRorrfwpPv$"
             }
           ],
+          "description": "API call to pull endpoint information by MAC",
           "display_name": "Get Endpoint By Name (MAC Address)",
           "method": "GET",
           "relative_url": "/ers/config/endpoint/name/$workflow.definition_workflow_020D3EWTUKNTZ1zNt57yF84vkN7RLktJj6k.input.variable_workflow_020D3KKLW7KYI3L6acMl5Eyl9S1ZxsZuu41$",
@@ -100,6 +102,7 @@
         "base_type": "subworkflow",
         "properties": {
           "continue_on_failure": false,
+          "description": "Sends the user in the \"Recipient Email\" field a message with the endpoint details. Uses a global Webex Access token.",
           "display_name": "Webex - Send Message to User",
           "input": {
             "variable_workflow_01PP77FMYQNAT1f0Boc3Jsu8zZuOJc7OaZs": "joeabrah@cisco.com",
