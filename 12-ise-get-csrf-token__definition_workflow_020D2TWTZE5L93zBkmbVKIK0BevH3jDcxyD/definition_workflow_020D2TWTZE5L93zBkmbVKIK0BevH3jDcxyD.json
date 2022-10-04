@@ -7,16 +7,16 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.secure_string",
         "properties": {
           "value": "",
           "scope": "output",
           "name": "X-CSRF-TOKEN",
-          "type": "datatype.string",
+          "type": "datatype.secure_string",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_020D2TWU9Y36J7UNRPUht78EkAbBX86jLdw",
+        "unique_name": "variable_workflow_020GBET3NNPMJ1mGm4pi4YlP6yRorrfwpPv",
         "object_type": "variable_workflow"
       }
     ],
@@ -26,6 +26,7 @@
         "is_atomic": true
       },
       "delete_workflow_instance": false,
+      "description": "This Atomic Action fetches the ISE CSRF Token and sets the X-CSRF-Token output variable as a secure string for use within ISE API calls.",
       "display_name": "Joe - ISE - Get CSRF Token",
       "runtime_user": {
         "target_default": true
@@ -128,7 +129,7 @@
                       "skip_execution": false,
                       "variables_to_update": [
                         {
-                          "variable_to_update": "$workflow.definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD.output.variable_workflow_020D2TWU9Y36J7UNRPUht78EkAbBX86jLdw$",
+                          "variable_to_update": "$workflow.definition_workflow_020D2TWTZE5L93zBkmbVKIK0BevH3jDcxyD.output.variable_workflow_020GBET3NNPMJ1mGm4pi4YlP6yRorrfwpPv$",
                           "variable_value_new": "$activity.definition_activity_020D2X2CWCHTV5Nnq07PpqNw4e6sM3gnOWG.input.source_array[@].value$"
                         }
                       ]
