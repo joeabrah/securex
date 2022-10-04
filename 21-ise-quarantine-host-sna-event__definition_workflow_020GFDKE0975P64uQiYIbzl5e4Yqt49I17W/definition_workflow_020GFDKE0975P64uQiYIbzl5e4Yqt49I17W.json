@@ -1,0 +1,224 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_020GFDKE0975P64uQiYIbzl5e4Yqt49I17W",
+    "name": "Joe - ISE - Quarantine Host - SNA - Event",
+    "title": "Joe - ISE - Quarantine Host - SNA - Event",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Joe - ISE - Quarantine Host - SNA - Event",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_020GCXFN5VZUD03NtgnwlGHmfXBcQZpbeFm",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_020GFECKXJAQB125PLf51Ao2dPlgDSo1ae4",
+        "name": "Secure Network Analytics - Get Tokens",
+        "title": "Secure Network Analytics - Get Tokens",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Secure Network Analytics - Get Tokens",
+          "input": {
+            "variable_workflow_01PP77WNJZR8O6EmgrneE38PqpQGAdDLHP9": "$global.variable_020GCVYRP6ZU25RXUYjHdfF5GqBZYFYrcfa.global.variable_020GCVYRP6ZU25RXUYjHdfF5GqBZYFYrcfa$",
+            "variable_workflow_01PP77WNJZUTO5HBYxlCRb8YoxIpqKI226W": "$global.variable_020GCW6ZY0AWG6CE4j3vETEjjvVcFQrV9DA.global.variable_020GCW6ZY0AWG6CE4j3vETEjjvVcFQrV9DA$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "target_type": "web-service.endpoint",
+            "use_workflow_target": true
+          },
+          "workflow_id": "definition_workflow_01PP77WNPU2BN3NLVN76izYSiOOsrn8CSKk",
+          "workflow_name": "Secure Network Analytics - Get Tokens"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_020GFEE2VGS7T74DZYmtStwt2mZIBx3uMbc",
+        "name": "Secure Network Analytics - Get Tenants",
+        "title": "Secure Network Analytics - Get Tenants",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Secure Network Analytics - Get Tenants",
+          "input": {
+            "variable_workflow_01PP74BRJD1I739hU0oWIBzYJ8VVh5YdiIx": "$activity.definition_activity_020GFECKXJAQB125PLf51Ao2dPlgDSo1ae4.output.variable_workflow_01PP77WNJZXB95ChLW4Z8YpZyZRIoHAQOMf$",
+            "variable_workflow_01PP74BRJD6GZ6viFJIE8h5phuAxS45A7qp": "$activity.definition_activity_020GFECKXJAQB125PLf51Ao2dPlgDSo1ae4.output.variable_workflow_01PP77WNJZW466xJB4ifxkhlUFYL1VzZIUC$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "target_type": "web-service.endpoint",
+            "use_workflow_target": true
+          },
+          "workflow_id": "definition_workflow_01PP74BRQ6UWD4BGykZegThMmriMz2isf2V",
+          "workflow_name": "Secure Network Analytics - Get Tenants"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_020GFHL9BVWJ22JWTWctItmtlEGF26Htv8G",
+        "name": "Secure Network Analytics - Get Security Events by Name",
+        "title": "Secure Network Analytics - Get Security Events by Name",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Secure Network Analytics - Get Security Events by Name",
+          "input": {
+            "variable_workflow_01PP75OJEZQMC7iN6BiJtyf5E3qa34uN8zE": "$activity.definition_activity_020GFECKXJAQB125PLf51Ao2dPlgDSo1ae4.output.variable_workflow_01PP77WNJZXB95ChLW4Z8YpZyZRIoHAQOMf$",
+            "variable_workflow_01PP75OJEZUG23WzaAGpfAfTKdUPvTdWiRU": "$activity.definition_activity_020GFECKXJAQB125PLf51Ao2dPlgDSo1ae4.output.variable_workflow_01PP77WNJZW466xJB4ifxkhlUFYL1VzZIUC$",
+            "variable_workflow_01PP75OJEZYG272WZZ5o4bndU4Tey7MEVOq": "Suspect Data Loss",
+            "variable_workflow_01PP75OJEZZTH7PuKZ7UQ7veZhOPhuiCv3k": "2022-10-03T00:30:00+00:00",
+            "variable_workflow_01PP75OJF010604pIPD5HWWMFD10Yiz8kQs": "2022-10-04T19:37:44.05Z",
+            "variable_workflow_01PP75OJF025X6NTTYn4hBdMfzhYGZL8noE": "301"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "target_type": "web-service.endpoint",
+            "use_workflow_target": true
+          },
+          "workflow_id": "definition_workflow_01PP75OJMJZG67j0aQa92RqifcSFVlKjqWI",
+          "workflow_name": "Secure Network Analytics - Get Security Events by Name"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "category_01NKU56HVICL53AmT4UwepyR1b3TE6WkG9i"
+    ]
+  },
+  "categories": {
+    "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r": {
+      "unique_name": "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "name": "SecureX",
+      "title": "SecureX",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m": {
+      "unique_name": "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "name": "response",
+      "title": "response",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01NKU56HVICL53AmT4UwepyR1b3TE6WkG9i": {
+      "unique_name": "category_01NKU56HVICL53AmT4UwepyR1b3TE6WkG9i",
+      "name": "incident",
+      "title": "incident",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_020GCXFN5VZUD03NtgnwlGHmfXBcQZpbeFm": {
+      "unique_name": "definition_target_020GCXFN5VZUD03NtgnwlGHmfXBcQZpbeFm",
+      "name": "Phoenix_SNA_Remote_Target",
+      "title": "Phoenix_SNA_Remote_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "ao_remote_id": "01XJQBOIXRA721ZXpq8tRtxQt8qs5MjdqgD",
+        "disable_certificate_validation": true,
+        "display_name": "Phoenix_SNA_Remote_Target",
+        "host": "192.168.40.15",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/",
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_020GCVYRP6ZU25RXUYjHdfF5GqBZYFYrcfa": {
+      "unique_name": "variable_020GCVYRP6ZU25RXUYjHdfF5GqBZYFYrcfa",
+      "properties": {
+        "value": "admin",
+        "scope": "global",
+        "name": "Phoenix_SNA_API_User",
+        "type": "datatype.string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_020GCW6ZY0AWG6CE4j3vETEjjvVcFQrV9DA": {
+      "unique_name": "variable_020GCW6ZY0AWG6CE4j3vETEjjvVcFQrV9DA",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Phoenix_SNA_API_Pass",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01PP77WNPU2BN3NLVN76izYSiOOsrn8CSKk",
+    "definition_workflow_01PP74BRQ6UWD4BGykZegThMmriMz2isf2V",
+    "definition_workflow_01PP75OJMJZG67j0aQa92RqifcSFVlKjqWI"
+  ],
+  "remotemetas": {
+    "remote_meta_01XJQBOIXU8XB3sbKrhMzHKJULeRHwa0E58": {
+      "base_type": "remote_meta",
+      "type": "generic.remote_meta",
+      "name": "Phoenix Lab Remote",
+      "title": "Phoenix Lab Remote",
+      "version": "1.0.0",
+      "properties": {
+        "cloud_type": "vmware",
+        "display_name": "Phoenix Lab Remote",
+        "network": {
+          "dns_servers": "192.168.40.3,192.168.40.4",
+          "gateway": "192.168.40.1",
+          "ip_endpoint": "192.168.40.25/24",
+          "is_static_ip": true
+        },
+        "proxy": {
+          "require_proxy": false
+        }
+      },
+      "unique_name": "remote_meta_01XJQBOIXU8XB3sbKrhMzHKJULeRHwa0E58",
+      "object_type": "remote_meta"
+    }
+  },
+  "dependent_workflows": [
+    "definition_workflow_01PP77WNPU2BN3NLVN76izYSiOOsrn8CSKk",
+    "definition_workflow_01PP74BRQ6UWD4BGykZegThMmriMz2isf2V",
+    "definition_workflow_01PP75OJMJZG67j0aQa92RqifcSFVlKjqWI"
+  ]
+}
