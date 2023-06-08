@@ -1,0 +1,153 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_026ALH6ZC5DL41QMDicoMy7QJdeTahBX2JJ",
+    "name": "Joe - XDR Notify Webex Teams Room of Incident",
+    "title": "Joe - XDR Notify Webex Teams Room of Incident",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Generates a notification in a given Webex room if an incident occurs",
+      "display_name": "Joe - XDR Notify Webex Teams Room of Incident",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01LYUOC8X21YK74qAzy87nLRWRDyMEg3ljb",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_026ALI1HI1JAE3Ekfmk6XBk2UU7SDpIrFZe",
+        "name": "Webex - Post Message to Room",
+        "title": "Webex - Post Message to Room",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Webex - Post Message to Room",
+          "input": {
+            "variable_workflow_01PP78DJH1TI76BYfsu9g0Tqj2S6cUxjtu5": "2e709d60-3a8f-11ed-b7cc-adb55e018c4d",
+            "variable_workflow_01PP78DJH1XNQ7gNQ5iZdperRHqrppzARXC": "$global.variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty.global.variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty$",
+            "variable_workflow_01PP78DJH1YWL3allalGQbg1VkgKwh9GvCi": "An incident has occurred in PhoenixLab XDR! Incident ID: $trigger.triggerevent_026ALP2ETXDCE1bnbCdwT0eWZGLpk9beBjL.output.incident.id$",
+            "variable_workflow_01PP78DJH22BB3Ej3I8tJ4OCQur0unYGjj9": "",
+            "variable_workflow_01SVERQNMKN8N6vqX2djMtAfshphGydGsH8": ""
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "target_type": "web-service.endpoint",
+            "use_workflow_target": true
+          },
+          "workflow_id": "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw",
+          "workflow_name": "Webex - Post Message to Room"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "rules": {
+    "ruleevent_026ALP2ER7AUO2azw0zVV9fHJrLeFatIfs5": {
+      "name": "Post Incident to Webex Teams Room",
+      "title": "Post Incident to Webex Teams Room",
+      "type": "incident.rule_event",
+      "rule_type": "rule_event",
+      "base_type": "rule",
+      "object_type": "ruleevent",
+      "version": "1.0.0",
+      "properties": {
+        "description": "",
+        "disabled": false,
+        "display_name": "Post Incident to Webex Teams Room",
+        "rule_type": "rule_event",
+        "title": "Post Incident to Webex Teams Room",
+        "workflows_config": [
+          {
+            "disabled": false,
+            "workflow_id": "definition_workflow_026ALH6ZC5DL41QMDicoMy7QJdeTahBX2JJ"
+          }
+        ]
+      },
+      "disabled": false,
+      "unique_name": "ruleevent_026ALP2ER7AUO2azw0zVV9fHJrLeFatIfs5"
+    }
+  },
+  "events": {
+    "event_026ALP2EPACIY5iQQVqFuoSRcU0VzGUtetD": {
+      "name": "Post Incident to Webex Teams Room",
+      "title": "Post Incident to Webex Teams Room",
+      "type": "incident.event",
+      "base_type": "event",
+      "object_type": "event",
+      "rule_id": "ruleevent_026ALP2ER7AUO2azw0zVV9fHJrLeFatIfs5",
+      "target_id": "",
+      "webhook_id": "",
+      "version": "1.0.0",
+      "properties": {
+        "disabled": false,
+        "display_name": "Post Incident to Webex Teams Room",
+        "rule_type": "rule_event",
+        "title": "Post Incident to Webex Teams Room"
+      },
+      "unique_name": "event_026ALP2EPACIY5iQQVqFuoSRcU0VzGUtetD"
+    }
+  },
+  "targets": {
+    "definition_target_01LYUOC8X21YK74qAzy87nLRWRDyMEg3ljb": {
+      "unique_name": "definition_target_01LYUOC8X21YK74qAzy87nLRWRDyMEg3ljb",
+      "name": "Webex Teams",
+      "title": "Webex Teams",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Webex Teams",
+        "disable_certificate_validation": false,
+        "display_name": "Webex Teams",
+        "host": "webexapis.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty": {
+      "unique_name": "variable_01XN7E858USXE3tjI7lj1oA27072mdOCcty",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "SecureX Webex Bot",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw"
+  ],
+  "dependent_workflows": [
+    "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw"
+  ],
+  "wf_rule_trigger": {
+    "triggerevent_026ALP2ETXDCE1bnbCdwT0eWZGLpk9beBjL": {
+      "wf_unique_name": "definition_workflow_026ALH6ZC5DL41QMDicoMy7QJdeTahBX2JJ",
+      "rule_unique_name": "ruleevent_026ALP2ER7AUO2azw0zVV9fHJrLeFatIfs5",
+      "trig_unique_name": "triggerevent_026ALP2ETXDCE1bnbCdwT0eWZGLpk9beBjL"
+    }
+  }
+}
