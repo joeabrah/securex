@@ -12,7 +12,7 @@
 01-secure-endpoint-v3-get-org
 01-secure-endpont-v1-isolate-host   
 02-ise-get-endpoint-by-name     
-21-ise-quarantine-host-endpoint-sna-event
+21-ise-quarantine-host-endpoint-sna-event    
 90-XDR-post-incident-to-webex-teams
 
 ## Atomic Action Library
